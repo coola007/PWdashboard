@@ -24,8 +24,8 @@
 // $stationids hold the weatherstation name(s) which will be used for the database(s)
 // $password is the password to import data
 
-$stationids  = array('WMR8800001','WMR8800002');          // Your station IDs, multiple stations comma separated, only use the letters a-Z, numbers 0-9, underscore (no space)
-$password    = 'password';                                // Password, same as pwdashboard.py password, same for all your weather stations
+$stationids  = array('WMR8800001','WMR8800002');          // Station IDs, multiple stations comma separated, only use the letters a-Z, numbers 0-9, underscore (no space)
+$password    = 'abc!@123';                                // Password, same as pweather.py password, same for all your weather stations
 $max_data    = 864;                                       // Maximum amount of rows to return. If more measurements exist averages will be returned
 
 // End of configuration
