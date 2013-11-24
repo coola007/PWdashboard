@@ -42,7 +42,7 @@ Download and unzip the PWdashboard.zip package and edit the <strong>pwdashboard.
 
 ```
 $stationids  = array('WMR8800001'); <= your weather station name
-$password    = 'password'; <= the same password you will use in your pwdashboard.py script
+$password    = 'password'; <= the same password you will use in your weewx.conf configuration
 ```
 
 
@@ -97,7 +97,7 @@ Provide a symbolic link in the database directory to the weewx.sdb file on your 
 
 That should be it, you can watch your weatherstation on your own HTML5/SVG website from anywhere in the world, even on your mobile phone!
 
-PS: Should you run into any problems, make sure that your stationid and password match up, you have read/write access to the files and the symbolic link (for local installtions) is working.
+PS: Should you run into any problems, make sure that your stationid and password match up in weewx.conf/pwdashboard.php/pwdashboard.htm, you have read/write access to the files and the symbolic link (for local installations) is working.
 
 
 
