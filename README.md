@@ -21,7 +21,7 @@ The dashboard is cross-browser & cross-platform compatible.
 <li><strong>pwdashboard.py</strong> - Python RESTful extension for Weewx</li>
 <li><strong>pwdashboard.php</strong> - PHP API for importing REST & exporting JSON data</li>
 <li><strong>index.htm</strong> - The HTML5 page to display the SVG dashboard</li>
-<li>and of course a stylesheet & SVG icons</li>
+<li>and of course a stylesheet and some eye candy</li>
 </ul>
 
 <strong>It uses:</strong>
@@ -30,6 +30,7 @@ The dashboard is cross-browser & cross-platform compatible.
 <li>Google Charts</li>
 <li>Google Map API</li>
 <li>JQuery</li>
+<li>JQuery plugins Backstretch & Cookie</li>
 <li>PHP & SQLite</li>
 </ul>
 
@@ -49,7 +50,8 @@ Edit the <strong>index.htm</strong> file and provide your weather station inform
 
 ```
       // Personal Weather Dashboard ID
-      var stationid = 'WMR8800001';
+      var stationid   = 'WMR8800001';
+      var displayname = 'My Local Weather';
       
       // Google map: Location, altitude, lat/lon, station type, setup
       var mapinfo = new Array(
@@ -91,7 +93,11 @@ Provide a symbolic link in the database directory to the weewx.sdb file on your 
     ln -s /home/weewx/archive/weewx.sdb weewx.sdb
 ```
 
-That should be it, data should be coming in and you can watch your weatherstation on your own HTML5/SVG website from anywhere in the world, even on your mobile phone!
+<strong>Final note</strong>
+
+That should be it, you can watch your weatherstation on your own HTML5/SVG website from anywhere in the world, even on your mobile phone!
+
+PS: Should you run into any problems, make sure that your stationid and password match up, you have read/write access to the files and the symbolic link (for local installtions) is working.
 
 
 
