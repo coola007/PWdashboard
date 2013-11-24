@@ -1,6 +1,6 @@
 <?php
 
-// Personal Weather Dashboard version 1.0.0
+// Personal Weather Dashboard version 1.0.2
 // 09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
 
 /* 
@@ -24,9 +24,10 @@
 // $stationids hold the weatherstation name(s) which will be used for the database(s)
 // $password is the password to import data
 
-$stationids  = array('WMR8800001','WMR8800002');          // Station IDs, multiple stations comma separated, only use the letters a-Z, numbers 0-9, underscore (no space)
-$password    = 'abc!@123';                                // Password, same as pweather.py password, same for all your weather stations
+$stationids  = array('WMR8800001','WMR8800002');          // Use the letters a-Z, numbers 0-9, underscore (no spaces!)
+$password    = 'ABCdef1234';                              // Password, same as pweather.py password, same for all your weather stations
 $max_data    = 864;                                       // Maximum amount of rows to return. If more measurements exist averages will be returned
+$local_db    = false;                                     // True if you run weewx and pwdashboard on the same server - assumes weewx as db name
 
 // End of configuration
 
@@ -60,7 +61,7 @@ try {
         /**
          * Valid export request (no password required)
          */
-        $graphdata = PWdashboard_export($_GET['ID'], $_GET['from'], $_GET['to'], $max_data);
+        $graphdata = PWdashboard_export($_GET['ID'], $_GET['from'], $_GET['to'], $max_data, $local_db);
         echo $graphdata;
 
     } else {
@@ -130,10 +131,15 @@ function PWdashboard_import($database) {
 * Export JSON data
 *
 */	
-function PWdashboard_export($database, $from, $to, $max) {
+function PWdashboard_export($database, $from, $to, $max, $local) {
     
     // Open database connection
-    $dbhandle = new PDO("sqlite:database/$database.sdb");
+    if ($local) {
+      $dbhandle = new PDO("sqlite:database/weewx.sdb");
+      $database = 'archive';
+    } else {
+      $dbhandle = new PDO("sqlite:database/$database.sdb");
+    }
     if ($to == 0) {
       // Return last measurement
       $query = "SELECT * FROM $database ORDER BY dateTime DESC LIMIT 1";
@@ -181,7 +187,7 @@ function PWdashboard_export($database, $from, $to, $max) {
                 . '{"type": "number","label": "UV"}],"rows": [';
     // Add the rows with data -Timestamps are in UTC
     foreach ($result as $row) {
-            $json_data .= '{"c": [{"v": "Date(' . $row['dateTime']*1000 . ')"},'
+            $json_data .= '{"c": [{"v": "Date(' . number_format($row['dateTime']*1000, 0, '.', '') . ')"},'
                 .'{"v": "' . $row['barometer'] . '"},'
                 . '{"v": "' . $row['outTemp'] . '"},'
                 . '{"v": "' . $row['outHumidity'] . '"},'

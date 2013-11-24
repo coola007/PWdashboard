@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     
     <!--
-    Personal Weather Dashboard version 1.0.1
+    Personal Weather Dashboard version 1.0.2
     09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
     
     This program is free software: you can redistribute it and/or modify
@@ -43,7 +43,8 @@
       // *** User Configuration ***    
       
       // Personal Weather Dashboard ID
-      var stationid = 'WMR8800001';
+      var stationid   = 'WMR8800001';
+      var displayname = 'My Local Weather';
       
       // Google map: Location, altitude, lat/lon, station type, how it is connected to the net
       var mapinfo = new Array(
@@ -164,6 +165,20 @@
           }
         }
       });
+
+      // The error message when JSON errors are encountered
+      $("#dialog3").dialog({
+        autoOpen: false,
+        resizable: false,            
+        modal: true,
+        buttons: {
+          Ok: function() {
+            $(this).dialog("close");
+	    $(".progressbar-hide").hide();
+	    $("#setdatetime").button("enable");
+          }
+        }
+      });
       
       // The time period date picker
       $("#from").datepicker({    
@@ -192,7 +207,7 @@
       $('input:text[name=to]').val(new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2));
       
       // Update Station Name
-      $('#station-title').replaceWith('<div id="station-title">Station ' + stationid + '</div>');
+      $('#station-title').replaceWith('<div id="station-title">' + displayname + '</div>');
  
       // Rotate the background image
       $.backstretch(["inc/backgrounds/01.jpg", "inc/backgrounds/02.jpg", "inc/backgrounds/03.jpg", "inc/backgrounds/04.jpg", "inc/backgrounds/05.jpg"], {
@@ -257,7 +272,10 @@
             var jsonData = $.ajax({
                         url: "pwdashboard.php?ID=" + stationid + "&action=export&from=" + from + "&to=" + to,
                         dataType:"json",
-                        async: false
+                        async: false,
+			error: function(){
+			       $("#dialog3").dialog("open");
+			}			
             }).responseText;
             
             // Import the JSON data to the DataTable
@@ -323,7 +341,10 @@
             var jsonData = $.ajax({
                         url: "pwdashboard.php?ID=" + stationid + "&action=export&from=0&to=0",
                         dataType:"json",
-                        async: false
+                        async: false,
+			error: function(){
+			       $("#dialog3").dialog("open");
+			}			
             }).responseText;
 	    
             // Import the JSON data to the DataTable
@@ -1058,7 +1079,13 @@
                                     No data available for the selected period.
                                 </p>
 			    </div>
-                        
+			    <div id="dialog3" title="Error Message">
+                                <p><span class="ui-icon ui-icon-alert"></span>
+                                    Unable to communicate with the database.
+				    Please check stationid & password.
+                                </p>
+			    </div>                        
+			
                              <div id="vspacer1"></div>     
                              <div id="effect1" class="ui-widget-content ui-corner-all">
             		       <div id="progressbar1" class="progressbar-hide"><div id="label1" class="progress-label">Please wait .. loading data ...</div></div>                        
@@ -1190,7 +1217,7 @@
                                     <h3>Version information</h3>
                                     <div class="pane" style="height: 175px;">
                                                 <p>
-                                                Version 1.0.1<br />
+                                                Version 1.0.2<br />
                                                 09-2013 - JF Nutbroek - jfnutbroek@gmail.com
                                                 <p>
                                                 This program is free software: you can redistribute it and/or modify

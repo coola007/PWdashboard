@@ -8,6 +8,7 @@ Innovative HTML5 based SVG dashboard with dynamic charts, animated gauges, sorta
 <img src="http://www.mywebmymail.com/images/newstories/HTML5_Logo_64.png" height="64px" width="64px">
 
 Capture your data with a simple device like a Raspberry Pi and post the measurements to your hosting provider so you can display your data in real-time on your own website.
+As from version 1.0.2 it is possible to run PWdashboard from the local device using the original Weewx database. As all graph creation and calculations are done on the fly on the client, the load on the local device is kept to a minimum.
 
 The dashboard is cross-browser & cross-platform compatible.
 
@@ -75,6 +76,20 @@ Install Weewx on your home server. Just follow the standard 'out-of-the-box' Wee
 ```
 
 Stop Weewx (sh /etc/init.d/weewx stop) and restart (sh /etc/init.d/weewx start) to load the new configuration and RESTful extension. You can watch the syslog to verify if Weewx is running properly and data is posted to your webserver (watch tail /var/log/syslog).
+
+<strong>Weewx and PWdashboard on the same server</strong>
+
+There is no need to export/import data if you run your dashboard on the same server as Weewx. Edit pwdashboard.php and set the local database flag to true:
+
+```
+    $local_db = true;
+```
+
+Provide a symbolic link in the database directory to the weewx.sdb file on your server, as an example (could be different on your installation):
+
+```
+    ln -s /home/weewx/archive/weewx.sdb weewx.sdb
+```
 
 That should be it, data should be coming in and you can watch your weatherstation on your own HTML5/SVG website from anywhere in the world, even on your mobile phone!
 

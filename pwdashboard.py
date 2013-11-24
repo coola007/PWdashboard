@@ -1,4 +1,4 @@
-# Personal Weather Dashboard version 1.0.0
+# Personal Weather Dashboard version 1.0.2
 # 09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
 # Based on Ambient weewx restful.py by Tom Keffer <tkeffer@gmail.com>
 
@@ -9,8 +9,8 @@
     [StdRESTful]
         ...
     [[PWdashboard]]
-        station = stationid (e.g., "WMR8800001") 
-        password = password (e.g., "ABCdef1234") 
+        station = stationid (e.g., "WMR8800001") - No spaces!
+        password = password (e.g., "ABCdef1234") - No spaces! 
         server_url = URL to your webservers PHP API (e.g., "http://www.site.com/pwdashboard.php?") 
         driver = weewx.pwdashboard.PWdashboard
         
