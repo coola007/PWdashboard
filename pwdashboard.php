@@ -1,7 +1,7 @@
 <?php
 
-// Personal Weather Dashboard version 1.0.2
-// 09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
+// Personal Weather Dashboard version 1.0.3
+// 2013-2014 - JF Nutbroek <jfnutbroek@gmail.com>
 
 /* 
     This program is free software: you can redistribute it and/or modify

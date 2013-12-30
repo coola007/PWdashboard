@@ -4,8 +4,8 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
     <!--
-    Personal Weather Dashboard version 1.0.2.1
-    09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
+    Personal Weather Dashboard version 1.0.3
+    2013-2014 - JF Nutbroek <jfnutbroek@gmail.com>
     
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -128,6 +128,13 @@
       $("#refresh-gauges").click(function(){
 	$("#refresh-gauges").button("disable");
         updateGauges();
+      });
+
+      // Buttons ro refresh the charts
+      $(".refresh-charts").button();  
+      $(".refresh-charts").click(function(){
+	$(".refresh-charts").button("disable");
+        updateCharts();
       });
       
       // The progressbars
@@ -541,6 +548,23 @@
           }, 1500);
           	
     }    
+
+    function updateCharts() {
+	              
+	  // Get the data
+	  getData1();
+	  
+          // Filter data
+          if ($('input:radio[name=radio_filter]:checked').val() == "FilterOn")
+            filterdata(false);
+	    
+    	  // Redraw the Dashboard
+	  drawDashboard1();
+	  
+	  // Draw the data
+	  dashboard1.draw(data1);
+          	
+    }
     
     function updateDashboard() {
           
@@ -827,6 +851,8 @@
                 $("#accordion").accordion("option", "active", false);
                 // Hide the progressbar
                 $(".progressbar-hide").hide();
+		// Enable the buttons
+	        $(".refresh-charts").button("enable");
 	      }
             });
 
@@ -1083,7 +1109,8 @@
 			    <div id="dialog3" title="Error Message">
                                 <p><span class="ui-icon ui-icon-alert"></span>
                                     Unable to communicate with the database.
-				    Please check stationid & password.
+				    Please verify stationid & password.
+				    Please verify if database is accessible.
                                 </p>
 			    </div>                        
 			
@@ -1138,33 +1165,39 @@
             </div>
 			
 	    <div id="dashboard1">
-	     
-                        <div id="tabs-2">
+	                  
+	                <div id="tabs-2">
+			  <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                           <div id="temp_line_F_div" class="imperial"></div>
                           <div id="temp_line_C_div" class="metric"></div>                          
                         </div>
                         
                         <div id="tabs-3">
+			  <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                           <div id="baro_line_inHg_div" class="imperial"></div>
                           <div id="baro_line_mbar_div" class="metric"></div>                          
                         </div>
                         
                         <div id="tabs-4">
+			  <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                           <div id="wind_line_mph_div" class="imperial"></div>
                           <div id="wind_line_ms_div" class="metric"></div>
                           <div id="winddir_line_deg_div" class="linegraph"></div>                          
                         </div>
                         
                         <div id="tabs-5">
+			  <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                           <div id="rain_line_in_div" class="imperial"></div>
                           <div id="rain_line_mm_div" class="metric"></div> 
                         </div>
                         
                         <div id="tabs-6">
+			   <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                            <div id="humidity_line_div" class="linegraph"></div> 
                         </div>
                         
                         <div id="tabs-7">
+			    <div id="chart-refresh-container"><button class="refresh-charts" name="refresh-charts">Refresh</button></div>			  
                            <div id="radiation_line_wm_div" class="linegraph"></div>
                            <div id="uv_line_div" class="linegraph"></div>                           
                         </div>
@@ -1218,8 +1251,8 @@
                                     <h3>Version information</h3>
                                     <div class="pane" style="height: 175px;">
                                                 <p>
-                                                Version 1.0.2<br />
-                                                09-2013 - JF Nutbroek - jfnutbroek@gmail.com
+                                                Version 1.0.3<br />
+                                                2013-2014 - JF Nutbroek - jfnutbroek@gmail.com
                                                 <p>
                                                 This program is free software: you can redistribute it and/or modify
                                                 it under the terms of the GNU General Public License as published by

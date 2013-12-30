@@ -1,5 +1,5 @@
-# Personal Weather Dashboard version 1.0.2
-# 09-2013 - JF Nutbroek <jfnutbroek@gmail.com>
+# Personal Weather Dashboard version 1.0.3
+# 2013-2014 - JF Nutbroek <jfnutbroek@gmail.com>
 # Based on Ambient weewx restful.py by Tom Keffer <tkeffer@gmail.com>
 
 """weewx module that uploads weather data to a personal website
@@ -9,8 +9,8 @@
     [StdRESTful]
         ...
     [[PWdashboard]]
-        station = stationid (e.g., "WMR8800001") - No spaces!
-        password = password (e.g., "ABCdef1234") - No spaces! 
+        station = stationid (e.g., "WMR8800001") - No spaces in name, only a-Z, 0-9!
+        password = password (e.g., "ABCdef1234") - No spaces in password, only a-Z, 0-9! 
         server_url = URL to your webservers PHP API (e.g., "http://www.site.com/pwdashboard.php?") 
         driver = weewx.pwdashboard.PWdashboard
         
